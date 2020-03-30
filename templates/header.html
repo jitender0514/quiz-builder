@@ -1,0 +1,31 @@
+{% load common_tags %}
+
+<header id="header">
+	<div id="header-inner">	
+		<div id="logo">
+			<h1><a href="#">Cool<span>Logo</span></a></h1>
+		</div>
+		<div class="clr"></div>
+		<div id="top-nav">
+			<ul>
+				<li><a href="{% url 'public:homepage' %}">Home</a></li>
+				<li class="dropdown">Dropdown
+						<ul class="dropdown-content">
+							{% class_list %}
+						</ul>
+				</li>
+				<li><a href="#">Contact</a></li>
+				
+				{% if user.is_authenticated %}
+					<li class="rightalign"><a href="{% url 'teachers:logout' %}">Logout</a></li>
+					<li class="rightalign"><a href="{% url 'teachers:change_password' %}">My Account</a></li>
+					<li class="rightalign"><a href="{% url 'teachers:dashboard' %}">Dashboard</a></li>
+				{% else %}
+					<li class="rightalign"><a href="{% url 'teachers:login_page' %}">Login</a></li>
+					<li class="rightalign"><a href="{% url 'public:registeration' %}">Sign Up</a></li>
+				{% endif %}
+			</ul>
+		</div>
+		<div class="clr"></div>
+	</div>
+</header>
