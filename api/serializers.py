@@ -43,9 +43,14 @@ class QuestionSerializer(serializers.ModelSerializer):
         question = Questions.objects.create(**validated_data)
         for ans in answers:
             # any ingredient logic here
-            print(ans)
             Answers.objects.create(question=question, **ans)
         return question
+
+    def update(self, instance, validated_data):
+        validated_data.pop('question_answers')
+        instance.question = validated_data['question']
+        instance.save()
+        return instance
 
     def validate_question_answers(self, values):
         print(values)
